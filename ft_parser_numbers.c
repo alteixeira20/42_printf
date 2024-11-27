@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:28:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/26 21:02:53 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:38:53 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	ft_parser_precision(const char **format, t_parser *info)
 
 static int	ft_parser_specifier(const char **format, t_parser *info)
 {
-	if (**format == 'd' || **format == 'i' || **format == 'u')
+	if (**format == 'd' || **format == 'i' || **format == 'u' ||
+		**format == '%')
 	{
 		info->specifier = **format;
 		(*format)++;
