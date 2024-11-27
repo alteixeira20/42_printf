@@ -59,6 +59,22 @@
 -- printf: Unsigned: 4294967295 | Return Value: 20
 -- ft_printf: Unsigned: 4294967295 | Return Value: 20
 
+- Double %: (%%):
+-- printf: Double %u | Return Value: 9
+-- ft_printf: Double %u | Return Value: 9
+
+- Double %: (%%):
+-- printf: Double u% | Return Value: 9
+-- ft_printf: Double u% | Return Value: 9
+
+- Double %: (%%):
+-- printf: Double %10 | Return Value: 10
+-- ft_printf: Double %10 | Return Value: 10
+
+- Double %: (%%):
+-- printf: Double 100% | Return Value: 11
+-- ft_printf: Double 100% | Return Value: 11
+
 === Bonus Tests: %d (Decimal), %i (Integer), %u (Unsigned) with Flags ===
 - Width: %10d:
 -- printf: Width:         42 | Return Value: 17

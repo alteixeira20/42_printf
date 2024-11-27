@@ -86,6 +86,13 @@ void test_mandatory_diu(void) {
     run_test("Unsigned: Zero (%u)", "Unsigned: %u", 0);
     run_test("Unsigned: Positive (%u)", "Unsigned: %u", 12345);
     run_test("Unsigned: UINT_MAX (%u)", "Unsigned: %u", UINT_MAX);
+
+    // Test %%
+    run_test("Double %: (%%)", "Double %%u");
+    run_test("Double %: (%%)", "Double u%%");
+    run_test("Double %: (%%)", "Double %%10");
+    run_test("Double %: (%%)", "Double 100%%");
+
 }
 
 // Bonus Tests
