@@ -14,122 +14,162 @@ void	redirect_stdout_to_file(const char *filename)
 // Helper function to restore stdout
 void	restore_stdout()
 {
-    freopen("/dev/tty", "w", stdout); // Redirects stdout back to terminal
+	freopen("/dev/tty", "w", stdout); // Redirects stdout back to terminal
 }
 
-int handle_numbers(const char *format, va_list args)
+int	handle_numbers(const char *format, va_list args)
 {
-    int ret_ft = 0;
+	int ret_ft = 0;
 
-    if (strchr(format, 'd') || strchr(format, 'i')) // Handle %d or %i
-    {
-        int value = va_arg(args, int);
-        ret_ft = ft_printf(format, value);
-    }
-    else if (strchr(format, 'u')) // Handle %u
-    {
-        unsigned int value = va_arg(args, unsigned int);
-        ret_ft = ft_printf(format, value);
-    }
+	if (strchr(format, 'd') || strchr(format, 'i')) // Handle %d or %i
+	{
+		int value = va_arg(args, int);
+        	ret_ft = ft_printf(format, value);
+    	}
+    	else if (strchr(format, 'u')) // Handle %u
+    	{
+       		unsigned int value = va_arg(args, unsigned int);
+        	ret_ft = ft_printf(format, value);
+    	}
 
-    return ret_ft;
+	return ret_ft;
 }
 
-int handle_char(const char *format, va_list args)
+int	handle_char(const char *format, va_list args)
 {
-    int ret_ft = 0;
+	int ret_ft = 0;
 
-    if (strchr(format, 'c')) // Handle %c
-    {
-        // Build argument list for multiple %c specifiers
-        char c_args[10]; // Supports up to 10 chars for simplicity
-        int count = 0;
+	if (strchr(format, 'c')) // Handle %c
+	{
+		// Build argument list for multiple %c specifiers
+		char c_args[10]; // Supports up to 10 chars for simplicity
+		int count = 0;
 
-        const char *p = format;
-        while (*p)
-        {
-            if (*p == '%' && *(p + 1) == 'c') // Find %c
-            {
-                c_args[count++] = (char)va_arg(args, int);
-                p++; // Skip 'c'
-            }
-            p++;
-        }
+		const char *p = format;
+        	while (*p)
+        	{
+            		if (*p == '%' && *(p + 1) == 'c') // Find %c
+            		{
+                		c_args[count++] = (char)va_arg(args, int);
+                		p++; // Skip 'c'
+            		}
+            		p++;
+        	}
 
-        // Call ft_printf dynamically based on number of arguments
-        switch (count)
-        {
-        case 1:
-            ret_ft = ft_printf(format, c_args[0]);
-            break;
-        case 2:
-            ret_ft = ft_printf(format, c_args[0], c_args[1]);
-            break;
-        case 3:
-            ret_ft = ft_printf(format, c_args[0], c_args[1], c_args[2]);
-            break;
-        default:
-            ret_ft = ft_printf(format); // Fallback
-            break;
-        }
-    }
+        	// Call ft_printf dynamically based on number of arguments
+        	switch (count)
+        	{
+        		case 1:
+            			ret_ft = ft_printf(format, c_args[0]);
+            			break;
+        		case 2:
+            			ret_ft = ft_printf(format, c_args[0], c_args[1]);
+            			break;
+        		case 3:
+            			ret_ft = ft_printf(format, c_args[0], c_args[1], c_args[2]);
+            			break;
+        		default:
+            			ret_ft = ft_printf(format); // Fallback
+            			break;
+        	}
+	}
+	return ret_ft;
+}
 
-    return ret_ft;
+int	handle_string(const char *format, va_list args)
+{
+	int ret_ft = 0;
+
+	if (strchr(format, 's')) // Handle %s
+	{
+		// Build argument list for multiple %s specifiers
+		const char *s_args[10]; // Supports up to 10 strings for simplicity
+        	int count = 0;
+
+        	const char *p = format;
+		while (*p)
+        	{
+            		if (*p == '%' && *(p + 1) == 's') // Find %s
+            		{
+                		s_args[count++] = va_arg(args, const char *);
+                		p++; // Skip 's'
+            		}
+            		p++;
+        	}
+
+        	// Call ft_printf dynamically based on number of arguments
+        	switch (count)
+        	{
+        		case 1:
+            			ret_ft = ft_printf(format, s_args[0]);
+           			break;
+			case 2:
+        			ret_ft = ft_printf(format, s_args[0], s_args[1]);
+				break;
+			case 3:
+				ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2]);
+				break;
+			case 4:
+        			ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2], s_args[3]);
+				break;
+			default:
+				ret_ft = ft_printf(format); // Fallback
+				break;
+       		}
+	}
+	return ret_ft;
 }
 
 // Helper function to run tests
-void run_test(const char *test_name, const char *format, ...)
+void	run_test(const char *test_name, const char *format, ...)
 {
-    va_list args;
-    int ret_ori, ret_ft;
+	va_list args;
+	int ret_ori, ret_ft;
 
-    printf("- %s:\n", test_name);
+	printf("- %s:\n", test_name);
 
-    // Test with printf
-    printf("-- printf: ");
-    fflush(stdout);
-    va_start(args, format);
-    ret_ori = vprintf(format, args); // Use vprintf for printf
-    va_end(args);
-    printf(" | Return Value: %d\n", ret_ori);
+	// Test with printf
+	printf("-- printf: ");
+	fflush(stdout);
+	va_start(args, format);
+	ret_ori = vprintf(format, args); // Use vprintf for printf
+	va_end(args);
+	printf(" | Return Value: %d\n", ret_ori);
 
-    // Test with ft_printf
-    printf("-- ft_printf: ");
-    fflush(stdout);
-    va_start(args, format);
+	// Test with ft_printf
+	printf("-- ft_printf: ");
+	fflush(stdout);
+	va_start(args, format);
 
-    if (strchr(format, '%') != NULL)
-    {
-        // Handle integer-related specifiers (%d, %i, %u)
-        if (strchr(format, 'd') || strchr(format, 'i') || strchr(format, 'u'))
-            ret_ft = handle_numbers(format, args);
+	if (strchr(format, '%') != NULL)
+	{
+		// Handle integer-related specifiers (%d, %i, %u)
+		if (strchr(format, 'd') || strchr(format, 'i') || strchr(format, 'u'))
+			ret_ft = handle_numbers(format, args);
 
-        // Handle character-related specifiers (%c)
-        else if (strchr(format, 'c'))
-            ret_ft = handle_char(format, args);
+        	// Handle character-related specifiers (%c)
+       		else if (strchr(format, 'c'))
+            		ret_ft = handle_char(format, args);
 
-        // Handle strings (%s)
-        else if (strchr(format, 's'))
-        {
-            char *value = va_arg(args, char *);
-            ret_ft = ft_printf(format, value);
-        }
+        	// Handle strings (%s)
+		else if (strchr(format, 's'))
+            		ret_ft = handle_string(format, args);
+        
+		// Handle literal percent (%%)
+		else if (strchr(format, '%'))
+			ret_ft = ft_printf(format);
 
-        // Handle literal percent (%%)
-        else if (strchr(format, '%'))
-            ret_ft = ft_printf(format);
+		// Default fallback
+		else
+			ret_ft = ft_printf(format);
+	}
+	else
+		ret_ft = ft_printf(format); // No specifiers
 
-        // Default fallback
-        else
-            ret_ft = ft_printf(format);
-    }
-    else
-        ret_ft = ft_printf(format); // No specifiers
+	va_end(args);
+	printf(" | Return Value: %d\n\n", ret_ft);
 
-    va_end(args);
-    printf(" | Return Value: %d\n\n", ret_ft);
-
-    fflush(stdout); // Ensure all output is flushed
+	fflush(stdout); // Ensure all output is flushed
 }
 
 // Mandatory Tests
@@ -168,6 +208,12 @@ void test_mandatory_diu(void) {
 	run_test("Char: (%c)", "Three Chars: %c%c%c", 'H', 'i', '!');
 	run_test("Char: (%c)", "Char '%%': %c", '%');
 	run_test("Char: (%c)", "Two Chars '%%': %c%c", '%', '%');
+
+	// Test %s
+	run_test("String: Single (%s)", "Hello %s!", "World");
+	run_test("String: Two (%s %s)", "%s %s!", "Hello", "World");
+	run_test("String: Three (%s %s %s)", "%s %s %s", "This", "is", "great!");
+	run_test("String: Null (%s)", "This is %s", NULL);
 }
 
 // Bonus Tests
@@ -225,4 +271,3 @@ int	main(void)
 
 	return (0);
 }
-
