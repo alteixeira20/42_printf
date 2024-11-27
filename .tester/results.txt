@@ -75,6 +75,22 @@
 -- printf: Double 100% | Return Value: 11
 -- ft_printf: Double 100% | Return Value: 11
 
+- Char: (%c):
+-- printf: Single Char: A | Return Value: 14
+-- ft_printf: Single Char: A | Return Value: 14
+
+- Char: (%c):
+-- printf: Three Chars: Hi! | Return Value: 16
+-- ft_printf: Three Chars: Hi! | Return Value: 16
+
+- Char: (%c):
+-- printf: Char '%': % | Return Value: 11
+-- ft_printf: Char '%': % | Return Value: 11
+
+- Char: (%c):
+-- printf: Two Chars '%': %% | Return Value: 17
+-- ft_printf: Two Chars '%': %% | Return Value: 17
+
 === Bonus Tests: %d (Decimal), %i (Integer), %u (Unsigned) with Flags ===
 - Width: %10d:
 -- printf: Width:         42 | Return Value: 17

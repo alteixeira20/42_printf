@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 16:31:04 by paalexan          #+#    #+#              #
-#    Updated: 2024/11/26 19:44:06 by paalexan         ###   ########.fr        #
+#    Updated: 2024/11/27 19:20:43 by diogomordaça    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ_DIR := obj
 
 # Source files
 SRC := $(addprefix $(SRC_DIR)/, \
-	ft_printf.c ft_printf_numbers.c ft_printf_utils.c ft_parser_numbers.c \
+	ft_printf.c ft_printf_numbers.c ft_printf_utils.c ft_parser.c \
 	ft_printf_utils_str.c)
 
 # Convert source file names to object file names

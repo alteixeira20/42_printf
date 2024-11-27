@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:48:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/27 16:40:24 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:35:12 by diogomordaça    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 
 	pc = 0;
 	ft_init_struct(info, pad);
-	if (ft_parser_numbers(form, info))
+	if (ft_parser(form, info))
 	{
 		if (info->specifier == 'd' || info->specifier == 'i')
 			pc += ft_printf_numbers(va_arg(args, int), info, pad);
@@ -41,6 +41,8 @@ static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 			pc += ft_printf_numbers(va_arg(args, unsigned int), info, pad);
 		else if (info->specifier == '%')
 			pc += ft_putchar_pf('%');
+		else if (info->specifier == 'c')
+			pc += ft_putchar_pf(va_arg(args, int));
 	}
 	return (pc);
 }

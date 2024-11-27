@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser_numbers.c                                :+:      :+:    :+:   */
+/*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:28:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/27 16:38:53 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:30:35 by diogomordaça    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_parser_precision(const char **format, t_parser *info)
 static int	ft_parser_specifier(const char **format, t_parser *info)
 {
 	if (**format == 'd' || **format == 'i' || **format == 'u' ||
-		**format == '%')
+		**format == '%' || **format == 'c')
 	{
 		info->specifier = **format;
 		(*format)++;
@@ -64,7 +64,7 @@ static int	ft_parser_specifier(const char **format, t_parser *info)
 		return (0);
 }
 
-int	ft_parser_numbers(const char **format, t_parser *info)
+int	ft_parser(const char **format, t_parser *info)
 {
 	(*format)++;
 	ft_parser_flags(format, info);
