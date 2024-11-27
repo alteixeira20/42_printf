@@ -59,19 +59,19 @@
 -- printf: Unsigned: 4294967295 | Return Value: 20
 -- ft_printf: Unsigned: 4294967295 | Return Value: 20
 
-- Double %: (%%):
+- Double %: (%%u):
 -- printf: Double %u | Return Value: 9
 -- ft_printf: Double %u | Return Value: 9
 
-- Double %: (%%):
+- Double %: (u%%):
 -- printf: Double u% | Return Value: 9
 -- ft_printf: Double u% | Return Value: 9
 
-- Double %: (%%):
+- Double %: (%%10):
 -- printf: Double %10 | Return Value: 10
 -- ft_printf: Double %10 | Return Value: 10
 
-- Double %: (%%):
+- Double %: (100%%):
 -- printf: Double 100% | Return Value: 11
 -- ft_printf: Double 100% | Return Value: 11
 
