@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:48:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/27 23:07:18 by diogomordaça    ###   ########.fr       */
+/*   Updated: 2024/11/28 01:11:33 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	ft_init_struct(t_parser *info, t_padding *pad)
 static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 {
 	int		pc;
-	char	*str;
 
 	pc = 0;
 	ft_init_struct(info, pad);
@@ -45,13 +44,11 @@ static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 		else if (info->specifier == 'c')
 			pc += ft_putchar_pf(va_arg(args, int));
 		else if (info->specifier == 's')
-		{
-			str = va_arg(args, char *);
-			if (!str)
-				str = "(null)";
-			ft_putstr_pf(str);
-			pc += ft_strlen_pf(str);
-		}
+			pc += ft_putstr_pf(va_arg(args, char *));
+		else if (info->specifier == 'p')
+			pc += ft_printf_p(va_arg(args, void *));
+		else if (info->specifier == 'x' || info->specifier == 'X')
+			pc += ft_printf_x(va_arg(args, unsigned int), info, pad);
 	}
 	return (pc);
 }
