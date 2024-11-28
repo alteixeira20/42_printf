@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 16:31:04 by paalexan          #+#    #+#              #
-#    Updated: 2024/11/28 01:01:59 by paalexan         ###   ########.fr        #
+#    Updated: 2024/11/28 17:12:38 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(BYEL)Compiled:$(D) $<"
 
+bonus: all
+
 # Remove object files
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -63,7 +65,7 @@ fclean: clean
 re: fclean all
 
 # Declare phony targets to avoid conflicts with files of the same name
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
 
 # **************************************************************************** #
 #                                  UTILS                                       #
