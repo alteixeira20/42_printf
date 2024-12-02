@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:59:22 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 16:31:09 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:23:05 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,48 +82,72 @@ int	handle_char(const char *format, va_list args)
 	return ret_ft;
 }
 
-int	handle_string(const char *format, va_list args)
-{
-	int ret_ft = 0;
+const char *truncate_if_needed(const char *str, const char *format) {
+    if (!str || !strchr(format, '.')) return str;
 
-	if (strchr(format, 's')) // Handle %s
-	{
-		// Build argument list for multiple %s specifiers
-		const char *s_args[10]; // Supports up to 10 strings for simplicity
-        	int count = 0;
+    // Extract precision
+    const char *dot = strchr(format, '.');
+    int precision = atoi(dot + 1);
 
-        	const char *p = format;
-		while (*p)
-        	{
-            		if (*p == '%' && *(p + 1) == 's') // Find %s
-            		{
-                		s_args[count++] = va_arg(args, const char *);
-                		p++; // Skip 's'
-            		}
-            		p++;
-        	}
+    if (precision < 0 || precision >= (int)strlen(str)) return str;
 
-        	// Call ft_printf dynamically based on number of arguments
-        	switch (count)
-        	{
-        		case 1:
-            			ret_ft = ft_printf(format, s_args[0]);
-           			break;
-			case 2:
-        			ret_ft = ft_printf(format, s_args[0], s_args[1]);
-				break;
-			case 3:
-				ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2]);
-				break;
-			case 4:
-        			ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2], s_args[3]);
-				break;
-			default:
-				ret_ft = ft_printf(format); // Fallback
-				break;
-       		}
-	}
-	return ret_ft;
+    static char truncated[1024];
+    strncpy(truncated, str, precision);
+    truncated[precision] = '\0';
+    return truncated;
+}
+
+int handle_string(const char *format, va_list args) {
+    int ret_ft = 0;
+    int count = 0;
+    const char *s_args[10];
+    const char *p = format;
+
+    // Scan for %s and % s specifiers
+    while (*p) {
+        if (*p == '%' && (*(p + 1) == 's' || (*(p + 1) == ' ' && *(p + 2) == 's'))) {
+            const char *arg = va_arg(args, const char *);
+            if (count < 10) {
+                if (arg == NULL) {
+                    if (strchr(format, '.')) {
+                        // NULL with precision truncates to empty string
+                        s_args[count] = "";
+                    } else {
+                        s_args[count] = "(null)";
+                    }
+                } else {
+                    s_args[count] = truncate_if_needed(arg, format);
+                }
+                count++;
+            }
+            p += (*(p + 1) == ' ') ? 2 : 1;
+        }
+        p++;
+    }
+
+    // Call ft_printf with the appropriate arguments
+    switch (count) {
+        case 1:
+            ret_ft = ft_printf(format, s_args[0]);
+            break;
+        case 2:
+            ret_ft = ft_printf(format, s_args[0], s_args[1]);
+            break;
+        case 3:
+            ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2]);
+            break;
+        case 4:
+            ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2], s_args[3]);
+            break;
+        case 5:
+            ret_ft = ft_printf(format, s_args[0], s_args[1], s_args[2], s_args[3], s_args[4]);
+            break;
+        default:
+            ret_ft = ft_printf(format);
+            break;
+    }
+
+    return ret_ft;
 }
 
 int	handle_hex(const char *format, va_list args) {

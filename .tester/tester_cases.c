@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:17:34 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 19:17:33 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:29:36 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ void	run_test(const char *test_name, const char *format, ...)
 		printf(" | Return Value: %d\n\n", ret_ft);
 
 		fflush(stdout); // Ensure all output is flushed
+}
+
+void run_test_string(const char *test_name, const char *format, const char *arg) {
+    int ret_printf, ret_ft_printf;
+
+    printf("- %s:\n", test_name);
+
+    // Test with printf
+    printf("-- printf: ");
+    fflush(stdout);
+    ret_printf = printf(format, arg); // Directly pass the string argument
+    printf(" | Return Value: %d\n", ret_printf);
+
+    // Test with ft_printf
+    printf("-- ft_printf: ");
+    fflush(stdout);
+    ret_ft_printf = ft_printf(format, arg); // Directly pass the string argument
+    printf(" | Return Value: %d\n\n", ret_ft_printf);
 }
 
 void	test_hex(void) {
@@ -139,6 +157,46 @@ void	test_hex(void) {
 		ret_ft_printf = ft_printf("Uppercase Hex: %X", 0);
 		fflush(stdout); // Ensure ft_printf output aligns
 		printf(" | Return Value: %d\n\n", ret_ft_printf);
+}
+
+void test_strings_bonus(void)
+{
+    // Width Tests
+    run_test_string("String: %10s", "Width: %10s", "Hello");
+    run_test_string("String: %-10s", "Left Align: %-10s", "Hello");
+    run_test_string("String: %10s", "Width with NULL: %10s", NULL);
+    run_test_string("String: %-10s", "Left Align with NULL: %-10s", NULL);
+
+    // Precision Tests
+    run_test_string("String: %.5s", "Precision: %.5s", "Hello World");
+    run_test_string("String: %.0s", "Zero Precision: %.0s", "Hello World");
+    run_test_string("String: %.5s", "Precision with NULL: %.5s", NULL);
+    run_test_string("String: %.0s", "Zero Precision with NULL: %.0s", NULL);
+
+    // Width + Precision Tests
+    run_test_string("String: %10.5s", "Width + Precision: %10.5s", "Hello World");
+    run_test_string("String: %-10.5s", "Left Align + Precision: %-10.5s", "Hello World");
+    run_test_string("String: %10.5s", "Width + Precision with NULL: %10.5s", NULL);
+    run_test_string("String: %-10.5s", "Left Align + Precision with NULL: %-10.5s", NULL);
+
+    // Edge Cases
+    run_test_string("String: %s", "Empty String: %s", "");
+    run_test_string("String: %10s", "Width with Empty String: %10s", "");
+    run_test_string("String: %.5s", "Precision with Empty String: %.5s", "");
+    run_test_string("String: %10.5s", "Width + Precision with Empty String: %10.5s", "");
+
+    // Mixed Flags
+    run_test_string("String: %-10.5s", "Left Align + Precision: %-10.5s", "abcdefg");
+    run_test_string("String: %10.5s", "Width + Precision: %10.5s", "abcdefg");
+    run_test_string("String: %-10s", "Left Align: %-10s", "Hello World");
+    run_test_string("String: %10s", "Width: %10s", "Hello World");
+
+    // Space Flag
+    run_test_string("String: % s", "Space: % s", "hello");
+    run_test_string("String: % 10s", "Space with width: % 10s", "hello");
+    run_test_string("String: % .5s", "Space with precision: % .5s", "hello world");
+    run_test_string("String: % 5s", "Space with empty string: % 5s", "");
+    run_test_string("String: % s", "Space with NULL: % s", NULL);
 }
 
 void	test_mandatory_diu(void) {
@@ -240,4 +298,6 @@ void	test_bonus_diu(void)
 		run_test("Hex Lower: %#10x", "Width: %#10x", 42);
 		run_test("Hex Lower: %#.5x", "Precision: %#.5x", 42);
 		run_test("Hex Lower: %#10.5x", "Width + Precision: %#10.5x", 42);
+
+		test_strings_bonus();
 }

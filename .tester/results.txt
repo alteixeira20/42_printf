@@ -108,8 +108,8 @@
 -- ft_printf: Uppercase Hex: FF | Return Value: 17
 
 - Pointer: Valid Address (%p):
--- printf: Pointer: 0x7fff33dee0d4 | Return Value: 23
--- ft_printf: Pointer: 0x7fff33dee0d4 | Return Value: 23
+-- printf: Pointer: 0x7ffc5db331f4 | Return Value: 23
+-- ft_printf: Pointer: 0x7ffc5db331f4 | Return Value: 23
 - Pointer: NULL (%p):
 -- printf: Pointer: (nil) | Return Value: 14
 -- ft_printf: Pointer: (nil) | Return Value: 14
@@ -221,11 +221,11 @@
 
 - Unsigned: %+u:
 -- printf: Plus Flag: 42 | Return Value: 13
--- ft_printf: Plus Flag: 42 | Return Value: 13
+-- ft_printf: Plus Flag: +42 | Return Value: 14
 
 - Unsigned: % u:
 -- printf: Space Flag: 42 | Return Value: 14
--- ft_printf: Space Flag: 42 | Return Value: 14
+-- ft_printf: Space Flag:  42 | Return Value: 15
 
 - Hex Lower: %10x:
 -- printf: Width:         2a | Return Value: 17
@@ -253,7 +253,7 @@
 
 - Hex Upper: %#10X:
 -- printf: Width:       0X2A | Return Value: 17
--- ft_printf: Width:       0X2A | Return Value: 17
+-- ft_printf: Width:         0X2A | Return Value: 19
 
 - Hex Upper: %#.5X:
 -- printf: Precision: 0X0002A | Return Value: 18
@@ -261,11 +261,11 @@
 
 - Hex Upper: %#10.5X:
 -- printf: Width + Precision:    0X0002A | Return Value: 29
--- ft_printf: Width + Precision:    0X0002A | Return Value: 29
+-- ft_printf: Width + Precision:      0X0002A | Return Value: 31
 
 - Hex Lower: %#10x:
 -- printf: Width:       0x2a | Return Value: 17
--- ft_printf: Width:       0x2a | Return Value: 17
+-- ft_printf: Width:         0x2a | Return Value: 19
 
 - Hex Lower: %#.5x:
 -- printf: Precision: 0x0002a | Return Value: 18
@@ -273,5 +273,105 @@
 
 - Hex Lower: %#10.5x:
 -- printf: Width + Precision:    0x0002a | Return Value: 29
--- ft_printf: Width + Precision:    0x0002a | Return Value: 29
+-- ft_printf: Width + Precision:      0x0002a | Return Value: 31
+
+- String: %10s:
+-- printf: Width:      Hello | Return Value: 17
+-- ft_printf: Width:      Hello | Return Value: 17
+
+- String: %-10s:
+-- printf: Left Align: Hello      | Return Value: 22
+-- ft_printf: Left Align: Hello      | Return Value: 22
+
+- String: %10s:
+-- printf: Width with NULL:     (null) | Return Value: 27
+-- ft_printf: Width with NULL:     (null) | Return Value: 27
+
+- String: %-10s:
+-- printf: Left Align with NULL: (null)     | Return Value: 32
+-- ft_printf: Left Align with NULL: (null)     | Return Value: 32
+
+- String: %.5s:
+-- printf: Precision: Hello | Return Value: 16
+-- ft_printf: Precision: Hello | Return Value: 16
+
+- String: %.0s:
+-- printf: Zero Precision:  | Return Value: 16
+-- ft_printf: Zero Precision:  | Return Value: 16
+
+- String: %.5s:
+-- printf: Precision with NULL:  | Return Value: 21
+-- ft_printf: Precision with NULL: (null | Return Value: 26
+
+- String: %.0s:
+-- printf: Zero Precision with NULL:  | Return Value: 26
+-- ft_printf: Zero Precision with NULL:  | Return Value: 26
+
+- String: %10.5s:
+-- printf: Width + Precision:      Hello | Return Value: 29
+-- ft_printf: Width + Precision:      Hello | Return Value: 29
+
+- String: %-10.5s:
+-- printf: Left Align + Precision: Hello      | Return Value: 34
+-- ft_printf: Left Align + Precision: Hello      | Return Value: 34
+
+- String: %10.5s:
+-- printf: Width + Precision with NULL:            | Return Value: 39
+-- ft_printf: Width + Precision with NULL:      (null | Return Value: 39
+
+- String: %-10.5s:
+-- printf: Left Align + Precision with NULL:            | Return Value: 44
+-- ft_printf: Left Align + Precision with NULL: (null      | Return Value: 44
+
+- String: %s:
+-- printf: Empty String:  | Return Value: 14
+-- ft_printf: Empty String:  | Return Value: 14
+
+- String: %10s:
+-- printf: Width with Empty String:            | Return Value: 35
+-- ft_printf: Width with Empty String:            | Return Value: 35
+
+- String: %.5s:
+-- printf: Precision with Empty String:  | Return Value: 29
+-- ft_printf: Precision with Empty String:  | Return Value: 29
+
+- String: %10.5s:
+-- printf: Width + Precision with Empty String:            | Return Value: 47
+-- ft_printf: Width + Precision with Empty String:            | Return Value: 47
+
+- String: %-10.5s:
+-- printf: Left Align + Precision: abcde      | Return Value: 34
+-- ft_printf: Left Align + Precision: abcde      | Return Value: 34
+
+- String: %10.5s:
+-- printf: Width + Precision:      abcde | Return Value: 29
+-- ft_printf: Width + Precision:      abcde | Return Value: 29
+
+- String: %-10s:
+-- printf: Left Align: Hello World | Return Value: 23
+-- ft_printf: Left Align: Hello World | Return Value: 23
+
+- String: %10s:
+-- printf: Width: Hello World | Return Value: 18
+-- ft_printf: Width: Hello World | Return Value: 18
+
+- String: % s:
+-- printf: Space: hello | Return Value: 12
+-- ft_printf: Space: hello | Return Value: 12
+
+- String: % 10s:
+-- printf: Space with width:      hello | Return Value: 28
+-- ft_printf: Space with width:      hello | Return Value: 28
+
+- String: % .5s:
+-- printf: Space with precision: hello | Return Value: 27
+-- ft_printf: Space with precision: hello | Return Value: 27
+
+- String: % 5s:
+-- printf: Space with empty string:       | Return Value: 30
+-- ft_printf: Space with empty string:       | Return Value: 30
+
+- String: % s:
+-- printf: Space with NULL: (null) | Return Value: 23
+-- ft_printf: Space with NULL: (null) | Return Value: 23
 

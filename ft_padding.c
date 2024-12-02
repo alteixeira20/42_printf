@@ -6,11 +6,20 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:37:12 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 18:56:11 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:42:05 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	ft_is_diu(t_parser *info)
+{
+	if (info->specifier == 'd' || info->specifier == 'i')
+		return (1);
+	if (info->specifier == 'u')
+		return (1);
+	return (0);
+}
 
 int	ft_print_pad(int len, char c)
 {
@@ -62,7 +71,7 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 			printed_chars += pad->padding;
 		}
 	}
-	if (info->specifier != 'u')
+	if (ft_is_diu(info))
 	{
 		if (num >= 0 && info->flag_plus == 1)
 			printed_chars += ft_putchar_pf('+');
@@ -74,21 +83,23 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 
 void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad)
 {
-	int	flag;
+	int	flag_hex;
+	int	flag_diu;
 
-	flag = 0;
+	flag_hex = 0;
+	flag_diu = 0;
 	if (info->specifier == 'x' || info->specifier == 'X')
-		flag = 1;
+		flag_hex = 1;
 	else
-		flag = 0;
+		flag_hex = 0;
 	pad->zeros = 0;
 	if (info->precision > len)
 		pad->zeros = info->precision - len;
-	if (info->flag_hash && num != 0 && flag)
+	if (info->flag_hash && num != 0 && ft_is_diu(info))
 		len += 2;
 	if (info->precision == 0 && num == 0)
 		len = 0;
 	pad->padding = info->width - (len + pad->zeros);
-	if ((info->flag_plus || info->flag_space) && num >= 0)
+	if ((info->flag_plus || info->flag_space) && num >= 0 && flag_diu)
 		(pad->padding)--;
 }
