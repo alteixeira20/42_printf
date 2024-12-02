@@ -108,8 +108,8 @@
 -- ft_printf: Uppercase Hex: FF | Return Value: 17
 
 - Pointer: Valid Address (%p):
--- printf: Pointer: 0x7ffc1e462094 | Return Value: 23
--- ft_printf: Pointer: 0x7ffc1e462094 | Return Value: 23
+-- printf: Pointer: 0x7fff33dee0d4 | Return Value: 23
+-- ft_printf: Pointer: 0x7fff33dee0d4 | Return Value: 23
 - Pointer: NULL (%p):
 -- printf: Pointer: (nil) | Return Value: 14
 -- ft_printf: Pointer: (nil) | Return Value: 14
