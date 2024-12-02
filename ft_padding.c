@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:37:12 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 21:42:05 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:25:27 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,6 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 
 void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad)
 {
-	int	flag_hex;
-	int	flag_diu;
-
-	flag_hex = 0;
-	flag_diu = 0;
-	if (info->specifier == 'x' || info->specifier == 'X')
-		flag_hex = 1;
-	else
-		flag_hex = 0;
 	pad->zeros = 0;
 	if (info->precision > len)
 		pad->zeros = info->precision - len;
@@ -100,6 +91,6 @@ void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad)
 	if (info->precision == 0 && num == 0)
 		len = 0;
 	pad->padding = info->width - (len + pad->zeros);
-	if ((info->flag_plus || info->flag_space) && num >= 0 && flag_diu)
+	if ((info->flag_plus || info->flag_space) && num >= 0 && ft_is_diu(info))
 		(pad->padding)--;
 }
