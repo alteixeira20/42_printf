@@ -1,0 +1,277 @@
+=== Mandatory Tests: %d, %i, %u ===
+- Decimal: Zero (%d):
+-- printf: Decimal: 0 | Return Value: 10
+-- ft_printf: Decimal: 0 | Return Value: 10
+
+- Decimal: Positive:
+-- printf: Decimal: 12345 | Return Value: 14
+-- ft_printf: Decimal: 12345 | Return Value: 14
+
+- Decimal: Negative:
+-- printf: Decimal: -12345 | Return Value: 15
+-- ft_printf: Decimal: -12345 | Return Value: 15
+
+- Decimal: INT_MAX:
+-- printf: Decimal: 2147483647 | Return Value: 19
+-- ft_printf: Decimal: 2147483647 | Return Value: 19
+
+- Decimal: INT_MIN:
+-- printf: Decimal: -2147483648 | Return Value: 20
+-- ft_printf: Decimal: -2147483648 | Return Value: 20
+
+- Integer: Zero (%i):
+-- printf: Integer: 0 | Return Value: 10
+-- ft_printf: Integer: 0 | Return Value: 10
+
+- Integer: Positive (%i):
+-- printf: Integer: 12345 | Return Value: 14
+-- ft_printf: Integer: 12345 | Return Value: 14
+
+- Integer: Negative (%i):
+-- printf: Integer: -12345 | Return Value: 15
+-- ft_printf: Integer: -12345 | Return Value: 15
+
+- Integer: INT_MAX (%i):
+-- printf: Integer: 2147483647 | Return Value: 19
+-- ft_printf: Integer: 2147483647 | Return Value: 19
+
+- Integer: INT_MIN (%i):
+-- printf: Integer: -2147483648 | Return Value: 20
+-- ft_printf: Integer: -2147483648 | Return Value: 20
+
+- Unsigned: Zero (%u):
+-- printf: Unsigned: 0 | Return Value: 11
+-- ft_printf: Unsigned: 0 | Return Value: 11
+
+- Unsigned: Positive (%u):
+-- printf: Unsigned: 12345 | Return Value: 15
+-- ft_printf: Unsigned: 12345 | Return Value: 15
+
+- Unsigned: UINT_MAX (%u):
+-- printf: Unsigned: 4294967295 | Return Value: 20
+-- ft_printf: Unsigned: 4294967295 | Return Value: 20
+
+- Double %: (%%u):
+-- printf: Double %u | Return Value: 9
+-- ft_printf: Double %u | Return Value: 9
+
+- Double %: (u%%):
+-- printf: Double u% | Return Value: 9
+-- ft_printf: Double u% | Return Value: 9
+
+- Double %: (%%10):
+-- printf: Double %10 | Return Value: 10
+-- ft_printf: Double %10 | Return Value: 10
+
+- Double %: (100%%):
+-- printf: Double 100% | Return Value: 11
+-- ft_printf: Double 100% | Return Value: 11
+
+- Char: (%c):
+-- printf: Single Char: A | Return Value: 14
+-- ft_printf: Single Char: A | Return Value: 14
+
+- Char: (%c):
+-- printf: Three Chars: Hi! | Return Value: 16
+-- ft_printf: Three Chars: Hi! | Return Value: 16
+
+- Char: (%c):
+-- printf: Char '%': % | Return Value: 11
+-- ft_printf: Char '%': % | Return Value: 11
+
+- Char: (%c):
+-- printf: Two Chars '%': %% | Return Value: 17
+-- ft_printf: Two Chars '%': %% | Return Value: 17
+
+- String: Single (%s):
+-- printf: Hello World! | Return Value: 12
+-- ft_printf: Hello World! | Return Value: 12
+
+- String: Two (%s %s):
+-- printf: Hello World! | Return Value: 12
+-- ft_printf: Hello World! | Return Value: 12
+
+- String: Three (%s %s %s):
+-- printf: This is great! | Return Value: 14
+-- ft_printf: This is great! | Return Value: 14
+
+- String: Null (%s):
+-- printf: This is (null) | Return Value: 14
+-- ft_printf: This is (null) | Return Value: 14
+
+- Hexadecimal (lowercase): %x:
+-- printf: Lowercase Hex: ff | Return Value: 17
+-- ft_printf: Lowercase Hex: ff | Return Value: 17
+
+- Hexadecimal (uppercase): %X:
+-- printf: Uppercase Hex: FF | Return Value: 17
+-- ft_printf: Uppercase Hex: FF | Return Value: 17
+
+- Pointer: Valid Address (%p):
+-- printf: Pointer: 0x7ffc1e462094 | Return Value: 23
+-- ft_printf: Pointer: 0x7ffc1e462094 | Return Value: 23
+- Pointer: NULL (%p):
+-- printf: Pointer: (nil) | Return Value: 14
+-- ft_printf: Pointer: (nil) | Return Value: 14
+
+- Hexadecimal (lowercase, 0): %x:
+-- printf: Lowercase Hex: 0 | Return Value: 16
+-- ft_printf: Lowercase Hex: 0 | Return Value: 16
+
+- Hexadecimal (uppercase, 0): %X:
+-- printf: Uppercase Hex: 0 | Return Value: 16
+-- ft_printf: Uppercase Hex: 0 | Return Value: 16
+
+=== Bonus Tests: %d, %i, %u, %x and %X with Flags ===
+- Decimal: Supressed Zero (%.0d):
+-- printf: Decimal:  | Return Value: 9
+-- ft_printf: Decimal:  | Return Value: 9
+
+- Decimal: Padded Zero (%5d):
+-- printf: Decimal:     0 | Return Value: 14
+-- ft_printf: Decimal:     0 | Return Value: 14
+
+- Decimal: %10d:
+-- printf: Width:         42 | Return Value: 17
+-- ft_printf: Width:         42 | Return Value: 17
+
+- Decimal: %-10d:
+-- printf: Width: 42         | Return Value: 17
+-- ft_printf: Width: 42         | Return Value: 17
+
+- Decimal: %010d:
+-- printf: Width: 0000000042 | Return Value: 17
+-- ft_printf: Width: 0000000042 | Return Value: 17
+
+- Decimal: %.5d:
+-- printf: Precision: 00042 | Return Value: 16
+-- ft_printf: Precision: 00042 | Return Value: 16
+
+- Decimal: %10.5d:
+-- printf: Width + Precision:      00042 | Return Value: 29
+-- ft_printf: Width + Precision:      00042 | Return Value: 29
+
+- Decimal: %-10.5d:
+-- printf: Width + Precision: 00042      | Return Value: 29
+-- ft_printf: Width + Precision: 00042      | Return Value: 29
+
+- Decimal: %+d:
+-- printf: Plus Flag: +42 | Return Value: 14
+-- ft_printf: Plus Flag: +42 | Return Value: 14
+
+- Decimal: % d:
+-- printf: Space Flag:  42 | Return Value: 15
+-- ft_printf: Space Flag:  42 | Return Value: 15
+
+- Integer: %10i:
+-- printf: Width:         42 | Return Value: 17
+-- ft_printf: Width:         42 | Return Value: 17
+
+- Integer: %-10i:
+-- printf: Width: 42         | Return Value: 17
+-- ft_printf: Width: 42         | Return Value: 17
+
+- Integer: %010i:
+-- printf: Width: 0000000042 | Return Value: 17
+-- ft_printf: Width: 0000000042 | Return Value: 17
+
+- Integer: %.5i:
+-- printf: Precision: 00042 | Return Value: 16
+-- ft_printf: Precision: 00042 | Return Value: 16
+
+- Integer: %10.5i:
+-- printf: Width + Precision:      00042 | Return Value: 29
+-- ft_printf: Width + Precision:      00042 | Return Value: 29
+
+- Integer: %-10.5i:
+-- printf: Width + Precision: 00042      | Return Value: 29
+-- ft_printf: Width + Precision: 00042      | Return Value: 29
+
+- Integer: %+i:
+-- printf: Plus Flag: +42 | Return Value: 14
+-- ft_printf: Plus Flag: +42 | Return Value: 14
+
+- Integer: % i:
+-- printf: Space Flag:  42 | Return Value: 15
+-- ft_printf: Space Flag:  42 | Return Value: 15
+
+- Unsigned: %10u:
+-- printf: Width:         42 | Return Value: 17
+-- ft_printf: Width:         42 | Return Value: 17
+
+- Unsigned: %-10u:
+-- printf: Width: 42         | Return Value: 17
+-- ft_printf: Width: 42         | Return Value: 17
+
+- Unsigned: %010u:
+-- printf: Width: 0000000042 | Return Value: 17
+-- ft_printf: Width: 0000000042 | Return Value: 17
+
+- Unsigned: %.5u:
+-- printf: Precision: 00042 | Return Value: 16
+-- ft_printf: Precision: 00042 | Return Value: 16
+
+- Unsigned: %10.5u:
+-- printf: Width + Precision:      00042 | Return Value: 29
+-- ft_printf: Width + Precision:      00042 | Return Value: 29
+
+- Unsigned: %-10.5u:
+-- printf: Width + Precision: 00042      | Return Value: 29
+-- ft_printf: Width + Precision: 00042      | Return Value: 29
+
+- Unsigned: %+u:
+-- printf: Plus Flag: 42 | Return Value: 13
+-- ft_printf: Plus Flag: 42 | Return Value: 13
+
+- Unsigned: % u:
+-- printf: Space Flag: 42 | Return Value: 14
+-- ft_printf: Space Flag: 42 | Return Value: 14
+
+- Hex Lower: %10x:
+-- printf: Width:         2a | Return Value: 17
+-- ft_printf: Width:         2a | Return Value: 17
+
+- Hex Lower: %.5x:
+-- printf: Precision: 0002a | Return Value: 16
+-- ft_printf: Precision: 0002a | Return Value: 16
+
+- Hex Lower: %10.5x:
+-- printf: Width + Precision:      0002a | Return Value: 29
+-- ft_printf: Width + Precision:      0002a | Return Value: 29
+
+- Hex Upper: %10X:
+-- printf: Width:         2A | Return Value: 17
+-- ft_printf: Width:         2A | Return Value: 17
+
+- Hex Upper: %.5X:
+-- printf: Precision: 0002A | Return Value: 16
+-- ft_printf: Precision: 0002A | Return Value: 16
+
+- Hex Upper: %10.5X:
+-- printf: Width + Precision:      0002A | Return Value: 29
+-- ft_printf: Width + Precision:      0002A | Return Value: 29
+
+- Hex Upper: %#10X:
+-- printf: Width:       0X2A | Return Value: 17
+-- ft_printf: Width:       0X2A | Return Value: 17
+
+- Hex Upper: %#.5X:
+-- printf: Precision: 0X0002A | Return Value: 18
+-- ft_printf: Precision: 0X0002A | Return Value: 18
+
+- Hex Upper: %#10.5X:
+-- printf: Width + Precision:    0X0002A | Return Value: 29
+-- ft_printf: Width + Precision:    0X0002A | Return Value: 29
+
+- Hex Lower: %#10x:
+-- printf: Width:       0x2a | Return Value: 17
+-- ft_printf: Width:       0x2a | Return Value: 17
+
+- Hex Lower: %#.5x:
+-- printf: Precision: 0x0002a | Return Value: 18
+-- ft_printf: Precision: 0x0002a | Return Value: 18
+
+- Hex Lower: %#10.5x:
+-- printf: Width + Precision:    0x0002a | Return Value: 29
+-- ft_printf: Width + Precision:    0x0002a | Return Value: 29
+

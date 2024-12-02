@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:15:21 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 03:00:33 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:07:07 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,20 @@ int	ft_printf_x(unsigned int num, t_parser *info, t_padding *pad)
 	int		len;
 	int		printed_chars;
 
+	printed_chars = 0;
 	hex_str = ft_itoa_base_pf(num, 16, (info->specifier == 'X'));
 	if (!hex_str)
 		return (-1);
 	len = ft_strlen_pf(hex_str);
-	ft_calc_pad(info, len, 0, pad);
-	printed_chars = ft_handle_sign_and_pad(info, 0, pad);
-	ft_print_pad(pad->zeros, '0');
-	printed_chars += pad->zeros + ft_putstr_pf(hex_str);
+	ft_calc_pad(info, len, num, pad);
+	if (!info->flag_minus && pad->padding > 0)
+		if (!(info->flag_zero && info->precision == -1))
+			printed_chars += ft_print_pad(pad->padding, ' ');
+	printed_chars += ft_handle_hash(num, info);
+	printed_chars += ft_print_pad(pad->zeros, '0');
+	printed_chars += ft_putstr_pf(hex_str);
 	if (info->flag_minus && pad->padding > 0)
-	{
-		ft_print_pad(pad->padding, ' ');
-		printed_chars += pad->padding;
-	}
+		printed_chars += ft_print_pad(pad->padding, ' ');
 	free(hex_str);
 	return (printed_chars);
 }

@@ -6,25 +6,27 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:28:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 02:57:40 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:09:02 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_parser_flags(const char **form, t_parser *info)
+static void	ft_parser_flags(const char **f, t_parser *info)
 {
-	while (**form == '-' || **form == '+' || **form == '0' || **form == ' ')
+	while (**f == '-' || **f == '+' || **f == '0' || **f == ' ' || **f == '#')
 	{
-		if (**form == '-')
+		if (**f == '-')
 			info->flag_minus = 1;
-		if (**form == '+')
+		if (**f == '+')
 			info->flag_plus = 1;
-		if (**form == '0')
+		if (**f == '0')
 			info->flag_zero = 1;
-		if (**form == ' ')
+		if (**f == ' ')
 			info->flag_space = 1;
-		(*form)++;
+		if (**f == '#')
+			info->flag_hash = 1;
+		(*f)++;
 	}
 }
 

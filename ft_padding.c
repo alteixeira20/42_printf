@@ -6,19 +6,24 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:37:12 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 00:58:40 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:56:11 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print_pad(int len, char c)
+int	ft_print_pad(int len, char c)
 {
+	int	counter;
+
+	counter = 0;
 	while (len > 0)
 	{
 		ft_putchar_pf(c);
 		len--;
+		counter++;
 	}
+	return (counter);
 }
 
 int	ft_handle_nb(t_parser *info, char *num_str, int len, t_padding *pad)
@@ -69,9 +74,18 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 
 void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad)
 {
+	int	flag;
+
+	flag = 0;
+	if (info->specifier == 'x' || info->specifier == 'X')
+		flag = 1;
+	else
+		flag = 0;
 	pad->zeros = 0;
 	if (info->precision > len)
 		pad->zeros = info->precision - len;
+	if (info->flag_hash && num != 0 && flag)
+		len += 2;
 	if (info->precision == 0 && num == 0)
 		len = 0;
 	pad->padding = info->width - (len + pad->zeros);

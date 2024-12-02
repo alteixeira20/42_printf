@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:16:05 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 03:42:55 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:08:06 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,19 @@ char	*ft_ptr_to_hex(void *ptr)
 	result = ft_strjoin_pf("0x", hex);
 	free(hex);
 	return (result);
+}
+
+int	ft_handle_hash(unsigned int num, t_parser *info)
+{
+	int	printed_chars;
+
+	printed_chars = 0;
+	if (info->flag_hash && num != 0)
+	{
+		if (info->specifier == 'X')
+			printed_chars += ft_putstr_pf("0X");
+		else
+			printed_chars += ft_putstr_pf("0x");
+	}
+	return (printed_chars);
 }

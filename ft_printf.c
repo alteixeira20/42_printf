@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:48:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 01:11:33 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:15:54 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	ft_init_struct(t_parser *info, t_padding *pad)
 	info->flag_zero = 0;
 	info->flag_plus = 0;
 	info->flag_space = 0;
+	info->flag_hash = 0;
 	info->width = 0;
 	info->precision = -1;
 	info->specifier = 0;
