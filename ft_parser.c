@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:28:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 19:09:02 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:00:11 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,17 @@ int	ft_parser(const char **format, t_parser *info)
 	ft_parser_flags(format, info);
 	ft_parser_width(format, info);
 	ft_parser_precision(format, info);
-	return (ft_parser_specifier(format, info));
+	if (!ft_parser_specifier(format, info))
+		return (0);
+	if (info->specifier == 'u')
+	{
+		info->flag_plus = 0;
+		info->flag_space = 0;
+	}
+	if (info->specifier == 'x' || info->specifier == 'X')
+	{
+		info->flag_plus = 0;
+		info->flag_space = 0;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:57:01 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 00:57:05 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:37:02 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_printf_numbers(int num, t_parser *info, t_padding *pad)
 	int		printed_chars;
 
 	if (info->specifier == 'u')
-		num_str = ft_utoa_pf((unsigned int)num);
+		num_str = ft_utoa_pf(num);
 	else
 		num_str = ft_itoa_pf(num);
 	if (!num_str)

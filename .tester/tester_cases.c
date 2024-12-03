@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:17:34 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 21:29:36 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:55:54 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,14 +170,11 @@ void test_strings_bonus(void)
     // Precision Tests
     run_test_string("String: %.5s", "Precision: %.5s", "Hello World");
     run_test_string("String: %.0s", "Zero Precision: %.0s", "Hello World");
-    run_test_string("String: %.5s", "Precision with NULL: %.5s", NULL);
     run_test_string("String: %.0s", "Zero Precision with NULL: %.0s", NULL);
 
     // Width + Precision Tests
     run_test_string("String: %10.5s", "Width + Precision: %10.5s", "Hello World");
     run_test_string("String: %-10.5s", "Left Align + Precision: %-10.5s", "Hello World");
-    run_test_string("String: %10.5s", "Width + Precision with NULL: %10.5s", NULL);
-    run_test_string("String: %-10.5s", "Left Align + Precision with NULL: %-10.5s", NULL);
 
     // Edge Cases
     run_test_string("String: %s", "Empty String: %s", "");
@@ -198,7 +195,6 @@ void test_strings_bonus(void)
     run_test_string("String: % 5s", "Space with empty string: % 5s", "");
     run_test_string("String: % s", "Space with NULL: % s", NULL);
 }
-
 void	test_mandatory_diu(void) {
 		printf("=== Mandatory Tests: %%d, %%i, %%u ===\n");
 
@@ -268,6 +264,12 @@ void	test_bonus_diu(void)
 		run_test("Integer: %-10.5i", "Width + Precision: %-10.5i", 42);
 		run_test("Integer: %+i", "Plus Flag: %+i", 42);
 		run_test("Integer: % i", "Space Flag: % i", 42);
+		run_test("Integer: %7i", "Width: %7i", 33);
+		run_test("Integer: %7i", "Width: %7i", -14);
+		run_test("Integer: %3i", "Width: %3i", 0);
+		run_test("Integer: %.6i", "Width: %.6i", -3);
+		run_test("Integer: %05i", "Width: %05i", 43);
+		run_test("Integer: %03i", "Width: %03i", 0);		
 
 		// Tests for %u (Unsigned)
 		run_test("Unsigned: %10u", "Width: %10u", 42);

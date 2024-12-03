@@ -6,20 +6,11 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:37:12 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/02 23:25:27 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:35:36 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	ft_is_diu(t_parser *info)
-{
-	if (info->specifier == 'd' || info->specifier == 'i')
-		return (1);
-	if (info->specifier == 'u')
-		return (1);
-	return (0);
-}
 
 int	ft_print_pad(int len, char c)
 {
@@ -40,9 +31,24 @@ int	ft_handle_nb(t_parser *info, char *num_str, int len, t_padding *pad)
 	int	printed_chars;
 
 	printed_chars = 0;
+	if (info->specifier == 's')
+	{
+		if (!num_str)
+			num_str = "(null)";
+		if (info->precision == 0)
+			return (ft_print_pad(pad->padding, ' '));
+		if (info->precision >= 0 && len > info->precision)
+			len = info->precision;
+		if (!info->flag_minus && pad->padding > 0)
+			printed_chars += ft_print_pad(pad->padding, ' ');
+		printed_chars += ft_putnstr_pf(num_str, len);
+		if (info->flag_minus && pad->padding > 0)
+			printed_chars += ft_print_pad(pad->padding, ' ');
+		return (printed_chars);
+	}
 	if (!(info->precision == 0 && num_str[0] == '0'))
 	{
-		ft_putstr_pf(num_str);
+		ft_putnstr_pf(num_str, ft_strlen_pf(num_str));
 		printed_chars += len;
 	}
 	if (info->flag_minus && pad->padding > 0)
@@ -58,24 +64,45 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 	int	printed_chars;
 
 	printed_chars = 0;
-	if (info->flag_minus == 0 && pad->padding > 0)
+	if (!info->flag_minus && pad->padding > 0)
 	{
-		if (info->flag_zero == 1 && info->precision == -1)
+		if (info->flag_zero && info->precision == -1)
 		{
-			ft_print_pad(pad->padding, '0');
-			printed_chars += pad->padding;
+			if ((info->specifier == 'd' || info->specifier == 'i') && num < 0)
+			{
+				printed_chars += ft_putchar_pf('-');
+				num = -num;
+			}
+			else if (info->specifier != 'u' && info->flag_plus)
+				printed_chars += ft_putchar_pf('+');
+			else if (info->specifier != 'u' && info->flag_space)
+				printed_chars += ft_putchar_pf(' ');
+			printed_chars += ft_print_pad(pad->zeros, '0');
 		}
 		else
 		{
-			ft_print_pad(pad->padding, ' ');
-			printed_chars += pad->padding;
+			printed_chars += ft_print_pad(pad->padding, ' ');
+			if ((info->specifier == 'd' || info->specifier == 'i') && num < 0)
+			{
+				printed_chars += ft_putchar_pf('-');
+				num = -num;
+			}
+			else if (info->specifier != 'u' && info->flag_plus)
+				printed_chars += ft_putchar_pf('+');
+			else if (info->specifier != 'u' && info->flag_space)
+				printed_chars += ft_putchar_pf(' ');
 		}
 	}
-	if (ft_is_diu(info))
+	if (info->flag_minus || (!info->flag_zero && pad->padding == 0))
 	{
-		if (num >= 0 && info->flag_plus == 1)
+		if ((info->specifier == 'd' || info->specifier == 'i') && num < 0)
+		{
+			printed_chars += ft_putchar_pf('-');
+			num = -num;
+		}
+		else if (info->specifier != 'u' && info->flag_plus)
 			printed_chars += ft_putchar_pf('+');
-		else if (num >= 0 && info->flag_space == 1)
+		else if (info->specifier != 'u' && info->flag_space)
 			printed_chars += ft_putchar_pf(' ');
 	}
 	return (printed_chars);
@@ -83,14 +110,33 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 
 void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad)
 {
+	int	prefix_len;
+
 	pad->zeros = 0;
+	if (info->specifier == 's')
+	{
+		if (info->precision == 0)
+			len = 0;
+		else if (info->precision >= 0 && len > info->precision)
+			len = info->precision;
+		pad->padding = info->width - len;
+		if (pad->padding < 0)
+			pad->padding = 0;
+		return ;
+	}
+	prefix_len = 0;
+	if (info->specifier == 'x' || info->specifier == 'X')
+	{
+		if (info->flag_hash && num != 0)
+			prefix_len = 2;
+	}
 	if (info->precision > len)
 		pad->zeros = info->precision - len;
-	if (info->flag_hash && num != 0 && ft_is_diu(info))
-		len += 2;
-	if (info->precision == 0 && num == 0)
-		len = 0;
-	pad->padding = info->width - (len + pad->zeros);
-	if ((info->flag_plus || info->flag_space) && num >= 0 && ft_is_diu(info))
-		(pad->padding)--;
+	else if (info->flag_zero && !info->flag_minus && info->precision == -1)
+		pad->zeros = info->width - len;
+	if (num < 0 || info->flag_plus || info->flag_space)
+		prefix_len++;
+	pad->padding = info->width - (len + pad->zeros + prefix_len);
+	if (pad->padding < 0)
+		pad->padding = 0;
 }

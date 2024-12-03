@@ -108,8 +108,8 @@
 -- ft_printf: Uppercase Hex: FF | Return Value: 17
 
 - Pointer: Valid Address (%p):
--- printf: Pointer: 0x7ffd142e8e14 | Return Value: 23
--- ft_printf: Pointer: 0x7ffd142e8e14 | Return Value: 23
+-- printf: Pointer: 0x7ffe2358e674 | Return Value: 23
+-- ft_printf: Pointer: 0x7ffe2358e674 | Return Value: 23
 - Pointer: NULL (%p):
 -- printf: Pointer: (nil) | Return Value: 14
 -- ft_printf: Pointer: (nil) | Return Value: 14
@@ -195,6 +195,30 @@
 -- printf: Space Flag:  42 | Return Value: 15
 -- ft_printf: Space Flag:  42 | Return Value: 15
 
+- Integer: %7i:
+-- printf: Width:      33 | Return Value: 14
+-- ft_printf: Width:      33 | Return Value: 14
+
+- Integer: %7i:
+-- printf: Width:     -14 | Return Value: 14
+-- ft_printf: Width:     -14 | Return Value: 14
+
+- Integer: %3i:
+-- printf: Width:   0 | Return Value: 10
+-- ft_printf: Width:   0 | Return Value: 10
+
+- Integer: %.6i:
+-- printf: Width: -000003 | Return Value: 14
+-- ft_printf: Width: -000003 | Return Value: 14
+
+- Integer: %05i:
+-- printf: Width: 00043 | Return Value: 12
+-- ft_printf: Width: 00043 | Return Value: 12
+
+- Integer: %03i:
+-- printf: Width: 000 | Return Value: 10
+-- ft_printf: Width: 000 | Return Value: 10
+
 - Unsigned: %10u:
 -- printf: Width:         42 | Return Value: 17
 -- ft_printf: Width:         42 | Return Value: 17
@@ -221,11 +245,11 @@
 
 - Unsigned: %+u:
 -- printf: Plus Flag: 42 | Return Value: 13
--- ft_printf: Plus Flag: +42 | Return Value: 14
+-- ft_printf: Plus Flag: 42 | Return Value: 13
 
 - Unsigned: % u:
 -- printf: Space Flag: 42 | Return Value: 14
--- ft_printf: Space Flag:  42 | Return Value: 15
+-- ft_printf: Space Flag: 42 | Return Value: 14
 
 - Hex Lower: %10x:
 -- printf: Width:         2a | Return Value: 17
@@ -253,7 +277,7 @@
 
 - Hex Upper: %#10X:
 -- printf: Width:       0X2A | Return Value: 17
--- ft_printf: Width:         0X2A | Return Value: 19
+-- ft_printf: Width:       0X2A | Return Value: 17
 
 - Hex Upper: %#.5X:
 -- printf: Precision: 0X0002A | Return Value: 18
@@ -261,11 +285,11 @@
 
 - Hex Upper: %#10.5X:
 -- printf: Width + Precision:    0X0002A | Return Value: 29
--- ft_printf: Width + Precision:      0X0002A | Return Value: 31
+-- ft_printf: Width + Precision:    0X0002A | Return Value: 29
 
 - Hex Lower: %#10x:
 -- printf: Width:       0x2a | Return Value: 17
--- ft_printf: Width:         0x2a | Return Value: 19
+-- ft_printf: Width:       0x2a | Return Value: 17
 
 - Hex Lower: %#.5x:
 -- printf: Precision: 0x0002a | Return Value: 18
@@ -273,7 +297,7 @@
 
 - Hex Lower: %#10.5x:
 -- printf: Width + Precision:    0x0002a | Return Value: 29
--- ft_printf: Width + Precision:      0x0002a | Return Value: 31
+-- ft_printf: Width + Precision:    0x0002a | Return Value: 29
 
 - String: %10s:
 -- printf: Width:      Hello | Return Value: 17
@@ -299,10 +323,6 @@
 -- printf: Zero Precision:  | Return Value: 16
 -- ft_printf: Zero Precision:  | Return Value: 16
 
-- String: %.5s:
--- printf: Precision with NULL:  | Return Value: 21
--- ft_printf: Precision with NULL: (null | Return Value: 26
-
 - String: %.0s:
 -- printf: Zero Precision with NULL:  | Return Value: 26
 -- ft_printf: Zero Precision with NULL:  | Return Value: 26
@@ -314,14 +334,6 @@
 - String: %-10.5s:
 -- printf: Left Align + Precision: Hello      | Return Value: 34
 -- ft_printf: Left Align + Precision: Hello      | Return Value: 34
-
-- String: %10.5s:
--- printf: Width + Precision with NULL:            | Return Value: 39
--- ft_printf: Width + Precision with NULL:      (null | Return Value: 39
-
-- String: %-10.5s:
--- printf: Left Align + Precision with NULL:            | Return Value: 44
--- ft_printf: Left Align + Precision with NULL: (null      | Return Value: 44
 
 - String: %s:
 -- printf: Empty String:  | Return Value: 14

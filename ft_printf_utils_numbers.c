@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:53 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 03:14:31 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:57:42 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,23 @@ static unsigned int	ft_unnum_len(unsigned int n)
 
 char	*ft_itoa_pf(int n)
 {
-	int		sign;
 	int		len;
 	char	*dest;
 
-	len = ft_num_len(n);
-	sign = 1;
+	if (n == INT_MIN)
+		return (ft_strdup_pf("2147483648"));
 	if (n < 0)
-		sign = -1;
+		n = -n;
+	len = ft_num_len(n);
 	dest = malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	dest[len] = '\0';
 	while (len > 0)
 	{
-		dest[--len] = '0' + (n % 10) * sign;
+		dest[--len] = '0' + (n % 10);
 		n /= 10;
 	}
-	if (sign == -1)
-		dest[0] = '-';
 	return (dest);
 }
 
