@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:48:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 06:27:10 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:21:06 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 		else if (info->specifier == 'p')
 			pc += ft_printf_p(va_arg(args, void *));
 		else if (info->specifier == 'x' || info->specifier == 'X')
-			pc += ft_printf_x(va_arg(args, unsigned int), info, pad);
+			pc += ft_printf_x(va_arg(args, unsigned long), info, pad);
 	}
 	return (pc);
 }

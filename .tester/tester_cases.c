@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:17:34 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 05:55:54 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:18:01 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,11 +285,15 @@ void	test_bonus_diu(void)
 		run_test("Hex Lower: %10x", "Width: %10x", 42);
 		run_test("Hex Lower: %.5x", "Precision: %.5x", 42);
 		run_test("Hex Lower: %10.5x", "Width + Precision: %10.5x", 42);
+		run_test("Hex Lower: %013x", "UINT_MAX: %013x", UINT_MAX);	
+		run_test("Hex Lower: %014x", "ULONG_MAX: %014x", ULONG_MAX);
 		
 		// Test for %X
 		run_test("Hex Upper: %10X", "Width: %10X", 42);
 		run_test("Hex Upper: %.5X", "Precision: %.5X", 42);
 		run_test("Hex Upper: %10.5X", "Width + Precision: %10.5X", 42);
+		run_test("Hex Upper: %013X", "UINT_MAX: %013X", UINT_MAX);
+		run_test("Hex Upper: %014X", "ULONG_MAX: %014X", ULONG_MAX);
 
 		// Test for %#X 
 		run_test("Hex Upper: %#10X", "Width: %#10X", 42);

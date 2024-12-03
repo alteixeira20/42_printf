@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:37:12 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 07:05:59 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:45:30 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad)
 
 	printed_chars = 0;
 	printed_chars += ft_handle_pad(info, num, pad);
-	if (info->flag_minus || (!info->flag_zero && pad->padding == 0))
-		printed_chars += ft_handle_sign(info, num);
+	//if (info->flag_minus || !info->flag_zero)
+	//	printed_chars += ft_handle_pad(info, num, pad);
 	return (printed_chars);
 }
 

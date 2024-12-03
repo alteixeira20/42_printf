@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:42:53 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 05:57:42 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:21:31 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_itoa_pf(int n)
 	return (dest);
 }
 
-char	*ft_utoa_pf(unsigned int n)
+char	*ft_utoa_pf(unsigned long n)
 {
 	char			*dest;
 	unsigned int	len;

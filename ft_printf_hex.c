@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:15:21 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 06:38:40 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:48:02 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_printf_x(unsigned int num, t_parser *info, t_padding *pad)
 	if (!hex_str)
 		return (-1);
 	len = ft_strlen_pf(hex_str);
-	ft_calc_pad(info, len, num, pad);
+	ft_calc_numeric_pad(info, len, num, pad);
 	if (info->precision == 0 && num == 0)
 	{
 		free(hex_str);

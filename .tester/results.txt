@@ -108,8 +108,8 @@
 -- ft_printf: Uppercase Hex: FF | Return Value: 17
 
 - Pointer: Valid Address (%p):
--- printf: Pointer: 0x7ffd5f838cd4 | Return Value: 23
--- ft_printf: Pointer: 0x7ffd5f838cd4 | Return Value: 23
+-- printf: Pointer: 0x7fff9c5d22a4 | Return Value: 23
+-- ft_printf: Pointer: 0x7fff9c5d22a4 | Return Value: 23
 - Pointer: NULL (%p):
 -- printf: Pointer: (nil) | Return Value: 14
 -- ft_printf: Pointer: (nil) | Return Value: 14
@@ -263,6 +263,14 @@
 -- printf: Width + Precision:      0002a | Return Value: 29
 -- ft_printf: Width + Precision:      0002a | Return Value: 29
 
+- Hex Lower: %013x:
+-- printf: UINT_MAX: 00000ffffffff | Return Value: 23
+-- ft_printf: UINT_MAX: 0000000000025 | Return Value: 23
+
+- Hex Lower: %014x:
+-- printf: ULONG_MAX: 000000ffffffff | Return Value: 25
+-- ft_printf: ULONG_MAX: 00000000000025 | Return Value: 25
+
 - Hex Upper: %10X:
 -- printf: Width:         2A | Return Value: 17
 -- ft_printf: Width:         2A | Return Value: 17
@@ -274,6 +282,14 @@
 - Hex Upper: %10.5X:
 -- printf: Width + Precision:      0002A | Return Value: 29
 -- ft_printf: Width + Precision:      0002A | Return Value: 29
+
+- Hex Upper: %013X:
+-- printf: UINT_MAX: 00000FFFFFFFF | Return Value: 23
+-- ft_printf: UINT_MAX: 0000000000025 | Return Value: 23
+
+- Hex Upper: %014X:
+-- printf: ULONG_MAX: 000000FFFFFFFF | Return Value: 25
+-- ft_printf: ULONG_MAX: 00000000000025 | Return Value: 25
 
 - Hex Upper: %#10X:
 -- printf: Width:       0X2A | Return Value: 17
