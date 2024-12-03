@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:33:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 06:36:18 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/03 07:00:29 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,10 @@ int		ft_print_pad(int len, char c);
 int		ft_handle_nb(t_parser *info, char *num_str, int len, t_padding *pad);
 int		ft_handle_sign_and_pad(t_parser *info, int num, t_padding *pad);
 void	ft_calc_pad(t_parser *info, int len, int num, t_padding *pad);
+int		ft_handle_str(t_parser *info, char *num_str, int len, t_padding *pad);
+int		ft_handle_pad(t_parser *info, int num, t_padding *pad);
+int		ft_handle_sign(t_parser *info, int num);
+void	ft_calc_string_pad(t_parser *info, int len, t_padding *pad);
+void	ft_calc_numeric_pad(t_parser *info, int len, int num, t_padding *pad);
 
 #endif
