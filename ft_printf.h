@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 22:33:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 18:18:09 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/04 03:12:04 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_padding
 int		ft_printf_numbers(int num, t_parser *info, t_padding *pad);
 int		ft_printf_strings(const char *str, t_parser *info, t_padding *pad);
 int		ft_printf_char(char c, t_parser *info, t_padding *pad);
-int		ft_printf_p(void *ptr);
+int		ft_printf_p(void *ptr, t_parser *info, t_padding *pad);
 int		ft_printf_x(unsigned int num, t_parser *info, t_padding *pad);
 int		ft_printf(const char *format, ...);
 int		ft_parser(const char **format, t_parser *info);

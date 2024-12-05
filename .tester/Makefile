@@ -3,7 +3,7 @@ NAME = ft_printf_tester
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LIBFTPRINTF = ../libftprintf.a
-SRC = tester.c tester_cases.c tester_utils.c
+SRC = tester.c tester_cases.c tester_utils.c tester_prototypes.c
 OBJ = $(SRC:.c=.o)
 RESULT_FILE = results.txt
 

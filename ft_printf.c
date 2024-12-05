@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:48:35 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 18:21:06 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:14:34 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	ft_init_struct(t_parser *info, t_padding *pad)
 	pad->padding = 0;
 }
 
-// Process Format
 static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 {
 	int		pc;
@@ -47,9 +46,9 @@ static int	pft(const char **form, va_list args, t_parser *info, t_padding *pad)
 		else if (info->specifier == 's')
 			pc += ft_printf_strings(va_arg(args, const char *), info, pad);
 		else if (info->specifier == 'p')
-			pc += ft_printf_p(va_arg(args, void *));
+			pc += ft_printf_p(va_arg(args, void *), info, pad);
 		else if (info->specifier == 'x' || info->specifier == 'X')
-			pc += ft_printf_x(va_arg(args, unsigned long), info, pad);
+			pc += ft_printf_x(va_arg(args, int), info, pad);
 	}
 	return (pc);
 }

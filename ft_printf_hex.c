@@ -6,23 +6,40 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:15:21 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/03 19:48:02 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:39:54 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf_p(void *ptr)
+static int	handle_null_pointer(t_parser *info, t_padding *pad)
+{
+	char	*output;
+	int		len;
+	int		printed_chars;
+
+	output = "(nil)";
+	len = ft_strlen_pf(output);
+	printed_chars = 0;
+	ft_calc_string_pad(info, len, pad);
+	if (!info->flag_minus)
+		printed_chars += ft_print_pad(pad->padding, ' ');
+	printed_chars += ft_putnstr_pf(output, len);
+	if (info->flag_minus)
+		printed_chars += ft_print_pad(pad->padding, ' ');
+	return (printed_chars);
+}
+
+int	ft_printf_p(void *ptr, t_parser *info, t_padding *pad)
 {
 	char	*hex_str;
 	char	*output;
+	int		len;
 	int		printed_chars;
 
+	printed_chars = 0;
 	if (ptr == NULL)
-	{
-		output = "(nil)";
-		return (ft_putnstr_pf(output, ft_strlen_pf(output)));
-	}
+		return (handle_null_pointer(info, pad));
 	hex_str = ft_itoa_base_pf((unsigned long)ptr, 16, 0);
 	if (!hex_str)
 		return (-1);
@@ -30,7 +47,13 @@ int	ft_printf_p(void *ptr)
 	free(hex_str);
 	if (!output)
 		return (-1);
-	printed_chars = ft_putnstr_pf(output, ft_strlen_pf(output));
+	len = ft_strlen_pf(output);
+	ft_calc_string_pad(info, len, pad);
+	if (!info->flag_minus)
+		printed_chars += ft_print_pad(pad->padding, ' ');
+	printed_chars += ft_putnstr_pf(output, len);
+	if (info->flag_minus)
+		printed_chars += ft_print_pad(pad->padding, ' ');
 	free(output);
 	return (printed_chars);
 }
@@ -57,7 +80,7 @@ int	ft_printf_x(unsigned int num, t_parser *info, t_padding *pad)
 			printed_chars += ft_print_pad(pad->padding, ' ');
 	printed_chars += ft_handle_hash(num, info);
 	printed_chars += ft_print_pad(pad->zeros, '0');
-	printed_chars += ft_putnstr_pf(hex_str, ft_strlen_pf(hex_str));
+	printed_chars += ft_putnstr_pf(hex_str, len);
 	if (info->flag_minus && pad->padding > 0)
 		printed_chars += ft_print_pad(pad->padding, ' ');
 	free(hex_str);

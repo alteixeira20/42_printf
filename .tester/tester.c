@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:17:45 by paalexan          #+#    #+#             */
-/*   Updated: 2024/11/28 16:17:50 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:53:41 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(void)
 	redirect_stdout_to_file("results.txt");
 
 	// Run Mandatory Tests
-	test_mandatory_diu();
+	test_mandatory();
 	
 	// Run Bonus Tests
-	test_bonus_diu();
+	test_bonus();
 
 	// Restore stdout to terminal
 	restore_stdout();
