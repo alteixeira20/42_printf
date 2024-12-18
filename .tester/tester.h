@@ -6,14 +6,14 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:57:34 by paalexan          #+#    #+#             */
-/*   Updated: 2024/12/05 16:08:39 by paalexan         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:38:46 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TESTER_H
 #define TESTER_H
 
-#include "../ft_printf.h"
+#include "../src/ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>

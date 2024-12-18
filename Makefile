@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 16:31:04 by paalexan          #+#    #+#              #
-#    Updated: 2024/12/03 06:54:06 by paalexan         ###   ########.fr        #
+#    Updated: 2024/12/18 14:38:02 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,10 @@ CFLAGS := -Wall -Wextra -Werror
 CFLAGS += -g
 
 # Directories
-SRC_DIR := .
+SRC_DIR := src
+SRCB_DIR := srcb
 OBJ_DIR := obj
+OBJB_DIR := objb
 
 # Source files
 SRC := $(addprefix $(SRC_DIR)/, \
@@ -28,8 +30,14 @@ SRC := $(addprefix $(SRC_DIR)/, \
 	ft_printf_utils_numbers.c ft_printf_utils_hex.c ft_printf_utils_str.c \
 	ft_padding.c ft_padding_utils.c ft_parser.c)
 
-# Convert source file names to object file names
+SRCB := $(addprefix $(SRCB_DIR)/, \
+	ft_printf_bonus.c ft_printf_numbers_bonus.c ft_printf_hex_bonus.c ft_printf_strings_bonus.c \
+	ft_printf_utils_numbers_bonus.c ft_printf_utils_hex_bonus.c ft_printf_utils_str_bonus.c \
+	ft_padding_bonus.c ft_padding_utils_bonus.c ft_parser_bonus.c)
+
+# Object files
 OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+OBJB := $(addprefix $(OBJB_DIR)/, $(notdir $(SRCB:.c=.o)))
 
 # **************************************************************************** #
 #                                COMPILATION                                   #
@@ -38,33 +46,42 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 # Default target to create the library
 all: $(NAME)
 
-# Create library archive from object files
+# Create the standard library
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 	@echo "$(BGRN)Library $(NAME) created successfully!$(D)"
 
-# Compile source files into object files
+# Create the bonus library
+bonus: clean $(OBJB)
+	@ar rcs $(NAME) $(OBJB)
+	@echo "$(BGRN)Bonus library $(NAME) created successfully!$(D)"
+
+# Compile standard object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(BYEL)Compiled:$(D) $<"
 
-bonus: all
+# Compile bonus object files
+$(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
+	@mkdir -p $(OBJB_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(BYEL)Compiled (Bonus):$(D) $<"
 
 # Remove object files
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) $(OBJB_DIR)
 	@echo "$(BRED)Object files cleaned!$(D)"
 
-# Remove object files and the library
+# Remove all generated files
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(BRED)All cleaned up!$(D)"
 
-# Rebuild the library
+# Rebuild everything
 re: fclean all
 
-# Declare phony targets to avoid conflicts with files of the same name
+# Declare phony targets to avoid conflicts
 .PHONY: all bonus clean fclean re
 
 # **************************************************************************** #
@@ -73,21 +90,7 @@ re: fclean all
 
 # Colors
 B   := $(shell tput bold)
-BLA := $(shell tput setaf 0)
-RED := $(shell tput setaf 1)
-GRN := $(shell tput setaf 2)
-YEL := $(shell tput setaf 3)
-BLU := $(shell tput setaf 4)
-MAG := $(shell tput setaf 5)
-CYA := $(shell tput setaf 6)
-WHI := $(shell tput setaf 7)
-GRE := $(shell tput setaf 8)
 BRED := $(shell tput setaf 9)
 BGRN := $(shell tput setaf 10)
 BYEL := $(shell tput setaf 11)
-BBLU := $(shell tput setaf 12)
-BMAG := $(shell tput setaf 13)
-BCYA := $(shell tput setaf 14)
-BWHI := $(shell tput setaf 15)
 D := $(shell tput sgr0)
-BEL := $(shell tput bel)
