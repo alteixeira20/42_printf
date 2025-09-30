@@ -28,7 +28,6 @@ A reimplementation of the standard `printf`, engineered with full bonus flag cov
     <span> • </span>
     <a href="#Related">Related Projects</a>
     <span> • </span>
-    <a href="#Credits">Credits</a>
 </b></h3>
 
 ## <a id="About"></a>About ft_printf
@@ -133,6 +132,3 @@ make re
 ## <a id="Related"></a>Related Projects
 - Crafted to drop into a personal `libft`, enabling seamless reuse across other 42 milestones such as `get_next_line` or future C Piscine projects.
 - Tested against the same scenarios the school evaluation scripts expect, easing integration with custom tooling or CI setups you may build later.
-
-## <a id="Credits"></a>Credits
-Crafted by paalexan at 42 Porto. Feel free to study, adapt, or extend the work—attribution is appreciated when sharing or forking.
